@@ -1,0 +1,31 @@
+{
+  "country": "Philippines",
+  "country_code": "PH",
+  "island_group": "Visayas",
+  "region": "Region 06",
+  "region_code": "06",
+  "province": "Iloilo",
+  "province_code": "XX",
+  "city": "Iloilo City",
+  "city_type": "municipality",
+  "postal_code": "0000",
+  "latitude": 0,
+  "longitude": 0,
+  "routes": [
+    {
+      "route_code": "01",
+      "name": "New Route",
+      "waypoints": [
+        {
+          "sequence": 1,
+          "sub_locality": "Barangay TBD",
+          "sub_locality_type": "barangay",
+          "street": "Main St",
+          "destination": "Terminal",
+          "latitude": 0,
+          "longitude": 0
+        }
+      ]
+    }
+  ]
+}

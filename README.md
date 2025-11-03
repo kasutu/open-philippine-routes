@@ -4,9 +4,8 @@
   </a>
 </p>
 
-<h align="center">
- <h1>Open Philippine Routes (OPR)</h1>
-</h>
+<h1 align="center">Open Philippine Routes (OPR)</h1>
+
 <p align="center">
   A community-maintained dataset of public utility vehicle (PUV) routes across the Philippines
 </p>

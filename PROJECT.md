@@ -10,4 +10,4 @@ Release: `v0`
 Release: `v0`
 
 - [x] add cli tooling for drafting, validating, and publishing
-- [ ] enable service to query in prod and dev via in memory mapping of files
+- [x] enable service to query in prod and dev via in memory mapping of files

@@ -25,7 +25,7 @@
       "@registry/registry": ["libs/registry/src"],
       "@registry/registry/*": ["libs/registry/src/*"]
     },
-    "types": ["node"]
+    "types": ["bun-types"]
   }
 }
 // By restricting types to "node" it does not traverse all node_modules directories

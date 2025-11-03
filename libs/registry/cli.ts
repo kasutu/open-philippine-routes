@@ -10,11 +10,12 @@ const program = new Command();
 
 program
   .name('registry')
-  .description('CLI to manage route registry drafts')
+  .description('CLI to manage route registry library')
   .version('1.0.0');
 
 program
-  .command('create-draft')
+  .command('draft')
+  .alias('d')
   .description('Create a new draft version')
   .action(async () => {
     // 1. Get version number
@@ -207,7 +208,8 @@ program
 
 program
   .command('validate')
-  .description('Validate all draft versions in src/next/ matching v<digits>/')
+  .alias('a')
+  .description('Validate all draft versions')
   .action(async () => {
     const ajv = new Ajv({ allErrors: true, strict: false });
     addFormats(ajv);
@@ -310,6 +312,60 @@ program
       '\n' + (hasError ? '❌ Validation failed' : '✅ All drafts valid'),
     );
     if (hasError) process.exit(1);
+  });
+
+program
+  .command('pub')
+  .alias('p')
+  .description('Publish a draft version')
+  .argument('<version>', 'Version number (e.g., 0, 5, 12)')
+  .action(async (version: string) => {
+    // Validate version is digits-only
+    if (!/^\d+$/.test(version)) {
+      console.error(
+        '❌ Version must be a non-negative integer (e.g., 0, 1, 42)',
+      );
+      process.exit(1);
+    }
+
+    const nextDir = path.join(process.cwd(), 'libs', 'registry', 'src', 'next');
+    const dataDir = path.join(process.cwd(), 'libs', 'registry', 'src', 'data');
+
+    const draftDir = path.join(nextDir, `v${version}`);
+    const publishDir = path.join(dataDir, `v${version}`);
+
+    // 1. Check draft exists
+    if (!(await fs.pathExists(draftDir))) {
+      console.error(
+        `❌ Draft not found: ${path.relative(process.cwd(), draftDir)}`,
+      );
+      process.exit(1);
+    }
+
+    // 2. Check publish target does NOT exist
+    if (await fs.pathExists(publishDir)) {
+      console.error(`❌ Version v${version} is already published.`);
+      console.error(`   Location: ${path.relative(process.cwd(), publishDir)}`);
+      console.error('');
+      console.error(
+        `⚠️  Published versions are IMMUTABLE to prevent breaking clients.`,
+      );
+      console.error(
+        `💡 To release changes, create and publish a NEW version (e.g., v${Number(version) + 1}).`,
+      );
+      process.exit(1);
+    }
+
+    // 3. Ensure data directory exists
+    await fs.ensureDir(dataDir);
+
+    // 4. Copy draft to data
+    await fs.copy(draftDir, publishDir);
+
+    console.log(`✅ Published v${version}!`);
+    console.log(`📁 Source: ${path.relative(process.cwd(), draftDir)}`);
+    console.log(`➡️  Target: ${path.relative(process.cwd(), publishDir)}`);
+    console.log(`\n💡 Remember to commit this change!`);
   });
 
 program.parse();

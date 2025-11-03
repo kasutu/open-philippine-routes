@@ -94,9 +94,47 @@ io-centric record management for versioned immutable records.
 
 ## Project setup
 
-```bash
-$ npm install
-```
+1. **Fork & clone** the repo.
+
+   ```
+   git clone https://github.com/kasutu/open-philippine-routes.git
+   ```
+
+   Install dependencies
+
+   ```bash
+   bun install
+   ```
+
+2. **Create a draft**:
+
+   ```sh
+   bun run registry draft
+   ```
+
+   > Follow prompts for version and location.
+
+3. **Manually add real route data**
+   Replace the placeholder in the generated `.json` file with **actual routes and waypoints** (sequence, barangay, street, coords, etc.).
+
+4. **Validate**:
+
+   ```sh
+   bun run registry validate
+   ```
+
+   > Fix errors until it passes.
+
+5. **Commit & PR**:
+   - Push your `src/next/vN/` changes.
+   - Open a PR titled: `feat(registry): draft vN – Province, City`
+
+6. **Publishing**
+   Done by maintainers **after merge**—never publish in a PR.
+
+   > Drafts: `src/next/`
+   > Never edit `src/data/`
+   > One file per city
 
 ## Compile and run the project
 
@@ -122,4 +160,12 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+```
+
+```
+
+```
+
 ```

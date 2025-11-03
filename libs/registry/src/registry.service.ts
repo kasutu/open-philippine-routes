@@ -7,7 +7,6 @@ import {
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { join, resolve } from 'path';
 import { OPRResponse } from '@registry/registry/schema/schema';
-// libs/registry/src/registry.service.ts
 
 @Injectable()
 export class RegistryService implements OnModuleInit {
@@ -26,7 +25,7 @@ export class RegistryService implements OnModuleInit {
     let label: string;
 
     if (isProduction) {
-      // In dist/, data is copied to dist/libs/registry/data
+      // In dist/, data is copied to dist/data
       sourceDir = resolve(__dirname, 'data');
       label = 'published (prod)';
     } else {
@@ -36,9 +35,7 @@ export class RegistryService implements OnModuleInit {
     }
 
     if (!existsSync(sourceDir)) {
-      this.logger.warn(
-        `⚠️  Registry ${label} directory not found: ${sourceDir}`,
-      );
+      this.logger.warn(`Registry ${label} directory not found: ${sourceDir}`);
       return;
     }
 
@@ -48,7 +45,7 @@ export class RegistryService implements OnModuleInit {
       );
 
       if (versionDirs.length === 0) {
-        this.logger.warn(`⚠️  No ${label} versions found in: ${sourceDir}`);
+        this.logger.warn(`No ${label} versions found in: ${sourceDir}`);
         return;
       }
 
@@ -81,10 +78,10 @@ export class RegistryService implements OnModuleInit {
       }
 
       this.logger.log(
-        `✅ RegistryService loaded ${this.dataMap.size} route(s) from ${versionDirs.length} ${label} version(s)`,
+        `Loaded ${this.dataMap.size} route(s) from ${versionDirs.length} ${label} version(s)`,
       );
     } catch (e) {
-      this.logger.error(`❌ Failed to load registry ${label}:`, e);
+      this.logger.error(`Failed to load registry ${label}:`, e);
     }
   }
 

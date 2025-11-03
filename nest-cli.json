@@ -8,7 +8,7 @@
     "assets": [
       {
         "include": "libs/registry/src/data/**/*",
-        "outDir": "dist/libs/registry",
+        "outDir": "dist/data",
         "watchAssets": true
       }
     ]
@@ -21,6 +21,15 @@
       "sourceRoot": "libs/registry/src",
       "compilerOptions": {
         "tsConfigPath": "libs/registry/tsconfig.lib.json"
+      }
+    },
+    "app": {
+      "type": "application",
+      "root": "src",
+      "entryFile": "main",
+      "sourceRoot": "src",
+      "compilerOptions": {
+        "tsConfigPath": "tsconfig.app.json"
       }
     }
   }

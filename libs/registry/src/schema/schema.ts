@@ -8,7 +8,7 @@ export type Waypoint = {
   sub_locality: string;
   sub_locality_type: 'district' | 'barangay';
   street: string;
-  destination: string;
+  destination: string[];
 } & Coordinates;
 
 export type Route = {
@@ -17,7 +17,7 @@ export type Route = {
   waypoints: Waypoint[];
 };
 
-export type OPRResponse = {
+export type City = {
   country: 'Philippines';
   country_code: 'PH';
   island_group: 'Luzon' | 'Visayas' | 'Mindanao';

@@ -3,8 +3,8 @@ import Ajv from 'ajv';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import path from 'path';
+import { City } from '@registry/registry/schema/schema';
 import { Command } from 'commander';
-import { OPRResponse } from '@registry/registry/schema/schema';
 
 const program = new Command();
 
@@ -162,7 +162,7 @@ program
     const filePath = path.join(draftPath, fileName);
 
     // 8. Create minimal valid JSON structure
-    const minimalData: OPRResponse = {
+    const minimalData: City = {
       country: 'Philippines' as const,
       country_code: 'PH' as const,
       island_group: island_group as 'Luzon' | 'Visayas' | 'Mindanao',
@@ -185,7 +185,7 @@ program
               sub_locality: 'Barangay TBD',
               sub_locality_type: 'barangay' as const,
               street: 'Main St',
-              destination: 'Terminal',
+              destination: ['Terminal', 'Robinsons'],
               latitude: 0,
               longitude: 0,
             },

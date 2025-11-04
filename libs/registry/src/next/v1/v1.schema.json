@@ -1,84 +1,147 @@
 {
+  "$ref": "#/definitions/City",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "OPRResponse",
-  "type": "object",
-  "additionalProperties": false,
-  "required": [
-    "country",
-    "country_code",
-    "island_group",
-    "region",
-    "region_code",
-    "province",
-    "province_code",
-    "city",
-    "city_type",
-    "postal_code",
-    "latitude",
-    "longitude",
-    "routes"
-  ],
-  "properties": {
-    "country": { "const": "Philippines" },
-    "country_code": { "const": "PH" },
-    "island_group": {
-      "type": "string",
-      "enum": ["Luzon", "Visayas", "Mindanao"]
-    },
-    "region": { "type": "string" },
-    "region_code": { "type": "string" },
-    "province": { "type": "string" },
-    "province_code": { "type": "string" },
-    "city": { "type": "string" },
-    "city_type": {
-      "type": "string",
-      "enum": ["highly_urbanized_city", "component_city", "municipality"]
-    },
-    "postal_code": {
-      "type": "string",
-      "pattern": "^\\d{4}$"
-    },
-    "latitude": { "type": "number" },
-    "longitude": { "type": "number" },
-    "routes": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["route_code", "name", "waypoints"],
-        "properties": {
-          "route_code": { "type": "string" },
-          "name": { "type": "string" },
-          "waypoints": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "sequence",
-                "sub_locality",
-                "sub_locality_type",
-                "street",
-                "destination",
-                "latitude",
-                "longitude"
-              ],
-              "properties": {
-                "sequence": { "type": "number" },
-                "sub_locality": { "type": "string" },
-                "sub_locality_type": {
-                  "type": "string",
-                  "enum": ["district", "barangay"]
-                },
-                "street": { "type": "string" },
-                "destination": { "type": "string" },
-                "latitude": { "type": "number" },
-                "longitude": { "type": "number" }
-              }
-            }
-          }
+  "definitions": {
+    "City": {
+      "additionalProperties": false,
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "city_type": {
+          "enum": [
+            "highly_urbanized_city",
+            "component_city",
+            "municipality"
+          ],
+          "type": "string"
+        },
+        "country": {
+          "const": "Philippines",
+          "type": "string"
+        },
+        "country_code": {
+          "const": "PH",
+          "type": "string"
+        },
+        "island_group": {
+          "enum": [
+            "Luzon",
+            "Visayas",
+            "Mindanao"
+          ],
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "province_code": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "region_code": {
+          "type": "string"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/definitions/Route"
+          },
+          "type": "array"
         }
-      }
+      },
+      "required": [
+        "city",
+        "city_type",
+        "country",
+        "country_code",
+        "island_group",
+        "latitude",
+        "longitude",
+        "postal_code",
+        "province",
+        "province_code",
+        "region",
+        "region_code",
+        "routes"
+      ],
+      "type": "object"
+    },
+    "Route": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "route_code": {
+          "type": "string"
+        },
+        "waypoints": {
+          "items": {
+            "$ref": "#/definitions/Waypoint"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "route_code",
+        "name",
+        "waypoints"
+      ],
+      "type": "object"
+    },
+    "Waypoint": {
+      "additionalProperties": false,
+      "properties": {
+        "destination": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "sequence": {
+          "type": "number"
+        },
+        "street": {
+          "type": "string"
+        },
+        "sub_locality": {
+          "type": "string"
+        },
+        "sub_locality_type": {
+          "enum": [
+            "district",
+            "barangay"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "destination",
+        "latitude",
+        "longitude",
+        "sequence",
+        "street",
+        "sub_locality",
+        "sub_locality_type"
+      ],
+      "type": "object"
     }
   }
 }

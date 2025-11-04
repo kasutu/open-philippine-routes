@@ -85,6 +85,7 @@ Release: `v0`
 
 - [x] add cli tooling for drafting, validating, and publishing
 - [x] enable service to query in prod and dev via in memory mapping of files
+- [ ] add schema endpoint to get the json schema + intructions
 
 # Contributing
 

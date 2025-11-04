@@ -28,6 +28,10 @@ Features:
 - Immutability of published data versions
 - Full backward compatibility for API consumers
 
+**Visual editor**
+A visual tool that can build routes in OPR schema is available [here](https://useopr.lovable.app/)
+![opr route builder app](image.png)
+
 **Quick Start**  
 Fetch route data using dynamic URI parameters:
 

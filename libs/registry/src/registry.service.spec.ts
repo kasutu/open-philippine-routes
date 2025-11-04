@@ -1,5 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { RegistryService } from './registry.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import { beforeEach, describe, expect, it } from 'bun:test';
 
 describe('RegistryService', () => {
   let service: RegistryService;

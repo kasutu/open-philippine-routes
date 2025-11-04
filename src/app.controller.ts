@@ -47,7 +47,7 @@ export class AppController {
       const dataCityNorm = data.city.toLowerCase().replace(/[^a-z0-9]/g, '');
 
       if (dataCityNorm === queryCityNorm) {
-        return data; // ✅ return full OPRResponse with all routes
+        return data; // ✅ return full City with all routes
       }
     }
 

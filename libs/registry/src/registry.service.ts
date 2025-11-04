@@ -1,3 +1,4 @@
+import { City } from '@registry/registry/schema/schema';
 import {
   existsSync,
   readdirSync,
@@ -6,11 +7,10 @@ import {
   } from 'fs';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { join, resolve } from 'path';
-import { OPRResponse } from '@registry/registry/schema/schema';
 
 @Injectable()
 export class RegistryService implements OnModuleInit {
-  private dataMap = new Map<string, OPRResponse>();
+  private dataMap = new Map<string, City>();
   private locationIndex = new Map<string, string>();
   private logger = new Logger(RegistryService.name);
 
@@ -64,7 +64,7 @@ export class RegistryService implements OnModuleInit {
           try {
             const filePath = join(dirPath, file);
             const content = readFileSync(filePath, 'utf-8');
-            const data: OPRResponse = JSON.parse(content);
+            const data: City = JSON.parse(content);
 
             const fileKey = `${version}/${file}`;
             this.dataMap.set(fileKey, data);
@@ -85,7 +85,7 @@ export class RegistryService implements OnModuleInit {
     }
   }
 
-  private buildLocationKey(data: OPRResponse): string {
+  private buildLocationKey(data: City): string {
     const norm = (s: string) => s.toLowerCase().replace(/\s+/g, '');
     return [
       norm(data.island_group),
@@ -96,7 +96,7 @@ export class RegistryService implements OnModuleInit {
   }
 
   // --- Public methods (unchanged) ---
-  getByVersionAndFile(version: string, filename: string): OPRResponse | null {
+  getByVersionAndFile(version: string, filename: string): City | null {
     const key = `${version}/${filename}`;
     return this.dataMap.get(key) || null;
   }
@@ -106,7 +106,7 @@ export class RegistryService implements OnModuleInit {
     regionCode: string;
     province: string;
     city: string;
-  }): OPRResponse | null {
+  }): City | null {
     const key = [
       params.islandGroup.toLowerCase().replace(/\s+/g, ''),
       params.regionCode.toLowerCase().replace(/\s+/g, ''),

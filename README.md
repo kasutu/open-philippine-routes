@@ -29,7 +29,7 @@ Features:
 - Full backward compatibility for API consumers
 
 **Visual editor**
-A visual tool that can build routes in OPR schema is available [here](https://useopr.lovable.app/)
+A visual tool that can build routes in OPR schema is available [here](https://useopr.vercel.app/)
 ![opr route builder app](image.png)
 
 **Quick Start**  

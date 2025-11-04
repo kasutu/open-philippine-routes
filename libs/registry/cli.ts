@@ -208,7 +208,7 @@ program
 
 program
   .command('validate')
-  .alias('a')
+  .alias('v')
   .description('Validate all draft versions')
   .action(async () => {
     const ajv = new Ajv({ allErrors: true, strict: false });
